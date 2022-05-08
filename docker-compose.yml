@@ -4,7 +4,7 @@ services:
   apache:
     build: ./apache
     ports: 
-      - 8181:80
+      - 80:80
     volumes:
       - ./src:/var/www/html
 
@@ -14,16 +14,16 @@ services:
     ports:
       - 3306:3306
     environment: 
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=lamp_db
-      - MYSQL_USER=lamp_user
-      - MYSQL_PASSWORD=lamp_password
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d       
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:5
     ports:
       - 8080:80
     environment:
